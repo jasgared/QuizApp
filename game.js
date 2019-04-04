@@ -1,6 +1,5 @@
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
-console.log(choices);
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -56,7 +55,6 @@ startGame = () => {
     // changes made to the questions wont affect the availableQuestions 
     // coz of usage of spread operator(...), making a full copy from questions
     availableQuestions = [...questions];
-    console.log(availableQuestions);
     getNewQuestion();
 }
 
@@ -91,7 +89,17 @@ choices.forEach(choice => {
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset['number'];
 
-        getNewQuestion();
+        const classToApply = 
+        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+        // Add the color and remove it after a while, as the color 
+        // continues to stay for later questions
+        selectedChoice.parentElement.classList.add(classToApply);
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply);
+            getNewQuestion();
+        }, 1000);
+        
     });
 })
 
