@@ -1,0 +1,34 @@
+[
+    {
+        "question": "WHich village does Hokage belong to?",
+        "choice1": "Sand",
+        "choice2": "Mist",
+        "choice3": "Rain",
+        "choice4": "Leaf",
+        "answer": 4
+    },
+    {
+        "question": "Who is the third Hokage?",
+        "choice1": "Naruto",
+        "choice2": "Tobirama",
+        "choice3": "Hiruzen",
+        "choice4": "Jiraiya",
+        "answer": 3
+    },
+    {
+        "question": "What are uchihas?",
+        "choice1": "Assasins",
+        "choice2": "Anbu",
+        "choice3": "Police",
+        "choice4": "Doctors",
+        "answer": 3
+    },
+    {
+        "question": "How many tails does Kurama have?",
+        "choice1": "3",
+        "choice2": "1",
+        "choice3": "8",
+        "choice4": "9",
+        "answer": 4
+    }
+]

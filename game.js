@@ -11,41 +11,41 @@ let questionCounter = 0;
 let availableQuestions = [];
 
 // hardcoded questions
-let questions = [
-    {
-        question: "WHich village does Hokage belong to?",
-        choice1: "Sand",
-        choice2: "Mist",
-        choice3: "Rain",
-        choice4: "Leaf",
-        answer: 4
-    },
-    {
-        question: "Who is the third Hokage?",
-        choice1: "Naruto",
-        choice2: "Tobirama",
-        choice3: "Hiruzen",
-        choice4: "Jiraiya",
-        answer: 3
-    },
-    {
-        question: "What are uchihas?",
-        choice1: "Assasins",
-        choice2: "Anbu",
-        choice3: "Police",
-        choice4: "Doctors",
-        answer: 3
-    },
-    {
-        question: "How many tails does Kurama have?",
-        choice1: "3",
-        choice2: "1",
-        choice3: "8",
-        choice4: "9",
-        answer: 4
-    }
+let questions = [];
 
-];
+fetch(
+    "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
+    )
+    .then(res => {
+        return res.json();
+    })
+    .then(loadedQuestions => {
+        console.log(loadedQuestions.results);
+        questions = loadedQuestions.results.map( loadedQuestion =>{
+            const formattedQuestion = {
+                question: loadedQuestion.question
+            };
+
+            const answerChoices = [...loadedQuestion.incorrect_answers];
+            formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
+            answerChoices.splice(
+                formattedQuestion.answer - 1, 
+                0, 
+                loadedQuestion.correct_answer
+            );
+            
+            answerChoices.forEach((choice, index) => {
+               formattedQuestion["choice" + (index + 1)] = choice;
+            });
+            return formattedQuestion;
+        });
+        // questions = loadedQuestions;
+        startGame();
+    })
+    .catch(err => {
+        // can put a badpage.html and aske for reporting
+        console.error(err);
+    })
 
 // Constants
 
@@ -119,4 +119,3 @@ incrementScore = num => {
     score += num;
     scoreText.innerText = score;
 }
-startGame();
